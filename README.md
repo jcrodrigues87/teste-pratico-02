@@ -82,15 +82,14 @@ Você deve desenvolver uma pequena aplicação WEB utilizando a linguagem de pro
 ## Orientações
 
 * Nesta aplicação é necessário desenvolver apenas duas páginas, uma para listar os candidatos e outra para realizar o cadastro do candidato;
-* Não é necessário implementar login ou outra forma de autenticação
+* Não é necessário implementar login ou outra forma de autenticação;
 * O banco de dados não pode permitir 2 candidatos com o mesmo e-mail;
 * O campo Código do Candidato deve ser sequencial e gerado automaticamente;
 * Deve usar o webservice da ViaCEP (https://viacep.com.br/) para preencher o endereço após preencher o campo CEP;
-* Faça fork desse projeto 
 
 ## Entrega
 
-* Para iniciar o teste, faça um fork deste repositório, crie uma branch com o seu nome completo e depois envie-nos o pull request. Se você apenas clonar o repositório não vai conseguir fazer push e depois vai ser mais complicado fazer o pull request.
+* Para iniciar o teste, faça um fork deste repositório, crie uma branch com o seu nome completo e depois envie-nos o pull request. Se você apenas clonar o repositório não vai conseguir fazer push e depois vai ser mais complicado fazer o pull request;
 * edite este README explicando como executar e testar a aplicação;
 * Todos os arquivos necessários para rodar o projeto devem estar no repositório do github;
 
