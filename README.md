@@ -47,6 +47,8 @@ Você deve desenvolver uma pequena aplicação WEB utilizando a linguagem de pro
 |----------------------------------------------|
 |   Conclusão | 20/04/1982                     |
 |----------------------------------------------|
+| Clique aqui para adicionar uma nova formação |
+|----------------------------------------------|
 
 |----------------------------------------------|
 |                  Habilidades                 |
