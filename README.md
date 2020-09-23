@@ -26,7 +26,7 @@ Você deve desenvolver uma pequena aplicação WEB utilizando a linguagem de pro
 
 ```
 |         Nome | Pedro Paulo de Faria
-| Data da Nasc. | 19/01/1964
+| Data da Nasc.| 19/01/1964
 |          CEP | 37925-000
 |     Endereço | logradouro, complemento, bairro, localidade, uf
 |       E-mail | ppf@dominio.com
