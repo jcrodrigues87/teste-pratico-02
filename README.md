@@ -14,9 +14,9 @@ Você deve desenvolver uma pequena aplicação WEB utilizando a linguagem de pro
 ### Portal de Talentos
 
 * Uma empresa deseja implementar um banco de talentos de programadores, para isso ela deseja desenvolver um portal para que candidatos possam fazer seu cadastro;
-* O cadastro deve conter os seguintes dados do candidato: Código, Nome, Data de Nascimento, E-mail, Telefone, Endereço, CEP, Formações (Nome da Formação, Nome da Instituição, Data de Conclusão) e Habilidades
+* O cadastro deve conter os seguintes dados do candidato: Código, Nome, Data de Nascimento, E-mail, Telefone, Endereço, CEP, Formações (Nome do Curso, Nome da Instituição, Data de Conclusão) e Habilidades
 * Campo Endereço do candidato deve ser preenchido automaticamente ao informar o CEP;
-* Um candidato pode ter nenhuma ou várias Formações;
+* O candidato pode ter nenhuma ou várias Formações;
 * O preenchimento do campo habilidades deve ser feito selecionando itens uma lista pré-definida que contém os seguintes itens: Java, Node.js, C++, PHP, Python, Go, ADVPL, Angular, Electron, React, React Native, MongoDB, MySQL, SQLServer, Postgres, Backend, Front-End
 * Deve ser possível visualizar uma lista com os candidatos (Código, Nome, E-mail, Telefone, Lista de Habilidades);
 * Selecionando um item da listagem de candidatos deve ser possível visualizar o cadastro completo do candidato;
@@ -35,13 +35,13 @@ Você deve desenvolver uma pequena aplicação WEB utilizando a linguagem de pro
 |----------------------------------------------|
 |                   Formações                  |
 |----------------------------------------------|
-|        Nome | COBOL Básico                   |
+|       Curso | COBOL Básico                   |
 |----------------------------------------------|
 | Instituição | Instituto Universal Brasileiro |
 |----------------------------------------------|
 |   Conclusão | 20/04/1976                     |
 |----------------------------------------------|
-|        Nome | Ciências da computação         |
+|       Curso | Ciências da computação         |
 |----------------------------------------------|
 | Instituição | UFMG                           |
 |----------------------------------------------|
