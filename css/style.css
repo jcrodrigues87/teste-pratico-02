@@ -1,14 +1,45 @@
 .endereco,
 .dados {
   display: flex;
+  justify-content: center;
 }
 
 .cabecalho {
   margin-bottom: 2%;
-  color: blue;
+  color: green;
 }
 
 .lista {
   margin-top: 2%;
   margin-bottom: 2%;
+}
+
+.col-md-6 input {
+  margin: 6px 0;
+}
+
+.dados input {
+  margin: 6px 0;
+}
+
+.dados label {
+  width: 80px;
+  margin-top: 10px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.center a button {
+  width: 200px;
+}
+
+.habilidades {
+  border: 1px solid rgb(170, 169, 169);
+  padding: 2%;
+  border-radius: 5px;
+  margin-bottom: 1%;
 }

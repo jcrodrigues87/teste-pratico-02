@@ -1,14 +1,10 @@
 <?php
 //Importando conexão com o banco
-require_once('database/db.class.php');
-
-$objDb = new db();
-$link = $objDb->conecta_mysql();
-
-$sql = "SELECT * FROM `lista_habilidades`";
-
-$resultado_id = mysqli_query($link, $sql);
+require_once('busca_habilidades.php');
+//Pegando lista de habilidades no banco
+$resultado = busca_habilidades();
 ?>
+
 
 <!DOCTYPE HTML>
 <html lang="pt-br">
@@ -36,94 +32,106 @@ $resultado_id = mysqli_query($link, $sql);
 </head>
 
 <body>
-  <!-- Cabeçalho -->
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4"></div>
-      <div class="col-md-4 cabecalho">
-        <h2>Portal de Talentos</h2>
-      </div>
-      <div class=" col-md-4"></div>
-    </div>
-  </div>
+  <!-- Header -->
+  <?php include 'header.php'; ?>
 
-  <!-- Inicio formulário -->
-  <div class="container">
 
+  <div class="container">
+    <!-- Inicio formulário -->
     <div class="col-md-12">
       <form method="post" action="registra_candidato.php">
 
         <div class="row">
           <div class="col-md-6">
-            <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome completo" required="requiored">
           </div>
           <div class="col-md-6">
-            <input type="text" class="form-control" id="data_nasc" name="data_nasc" placeholder="Data de Nascimento" required="requiored">
           </div>
         </div>
 
         <div class="row">
           <!-- Formulario ViaCEP -->
           <div class="col-md-6">
-            <input name="cep" type="text" class="form-control" id="cep" value="" size="10" maxlength="9" placeholder="CEP" required="requiored" />
-            <input name="rua" type="text" class="form-control" id="rua" size="50" placeholder="Logradouro" required="requiored" />
+            <input name="nome" type="text" class="form-control" id="nome" placeholder="Nome completo" required>
+            <input name="cep" type="text" class="form-control" id="cep" value="" size="10" maxlength="9" placeholder="CEP" required />
+            <input name="rua" type="text" class="form-control" id="rua" size="50" placeholder="Logradouro" required />
             <input name="complemento" type="text" class="form-control" id="complemento" size="20" placeholder="Complemento" />
+            <input name="email" type="email" class="form-control" id="email" placeholder="Email" required>
           </div>
 
           <div class="col-md-6">
-            <input name="bairro" type="text" class="form-control" id="bairro" size="30" placeholder="Bairro" required="requiored" />
-            <input name="cidade" type="text" class="form-control" id="cidade" size="40" placeholder="Cidade" required="requiored" />
-            <input name="uf" type="text" id="uf" class="form-control" size="2" placeholder="UF" /><br required="requiored" />
-          </div>
+            <input name="data_nasc" type="text" class="form-control" id="data_nasc" placeholder="Data de Nascimento" required>
+            <input name="bairro" type="text" class="form-control" id="bairro" size="30" placeholder="Bairro" required />
+            <input name="cidade" type="text" class="form-control" id="cidade" size="40" placeholder="Cidade" required />
+            <input name="uf" type="text" id="uf" class="form-control" size="2" placeholder="UF" required />
+            <input name="telefone" type="tel" class="form-control" id="telefone" placeholder="Telefone" size="20" required>
 
-          <div class="col-md-6">
-            <input type="email" class="form-control" id="email" name="email" placeholder="Email" required="requiored">
-          </div>
-
-          <div class="col-md-6">
-            <input type="text" class="form-control" id="telefone" name="telefone" placeholder="Telefone" size="20" required="requiored">
           </div>
 
         </div>
 
-
-        <!-- Lista de habilidades-->
-        <?php
-        if ($resultado_id) {
-          echo "<div class='container lista'>";
-
-          echo "<div class='row'>";
-          while ($registro = mysqli_fetch_array($resultado_id, MYSQLI_ASSOC)) {
-        ?>
-            <div class="col-md-2">
-              <input type="checkbox" class="form-check-input" value=<?= $registro['nome'] ?>>
-              <label class="form-check-label" for="materialUnchecked"><?= $registro['nome'] ?></label>
+        <!-- Formações-->
+        <div class="habilidades">
+          <h6>Suas formações:</h6>
+          <div class="row">
+            <div class="col-md-6 dados">
+              <label>Curso: </label>
+              <input name="nome_curso" type="text" class="form-control" id="nome_curso" />
             </div>
-        <?php
-          }
-          echo "</div>";
 
-          echo "</div>";
-        } else {
-          echo 'Erro ao consultar candidatos';
-        }
-        ?>
+            <div class="col-md-6 dados">
+              <label>Instituição: </label>
+              <input name="nome_instituicao" type="text" class="form-control" id="nome_instituicao" />
+            </div>
+
+            <div class="col-md-4 dados">
+              <label>Conclusão: </label>
+              <input name="data_conclusao" type="date" class="form-control" id="data_conclusao" />
+            </div>
+          </div>
+          <!-- Botao add formação-->
+          <button type="button" class="btn btn-outline-success"><b>Clique aqui para adicionar uma nova formação</b></button>
+        </div>
+
+        <!-- Escrevendo a lista de habilidades-->
+        <div class="habilidades">
+          <h6>Selecione suas habilidades:</h6>
+          <?php
+          if ($resultado) {
+            echo "<div class='container lista'>";
+            echo "<div class='row'>";
+            while ($registro = mysqli_fetch_array($resultado, MYSQLI_ASSOC)) {
+          ?>
+              <div class="col-md-2">
+                <input type="checkbox" class="form-check-input" value=<?= $registro['nome'] ?>>
+                <label class="form-check-label" for="materialUnchecked"><?= $registro['nome'] ?></label>
+              </div>
+          <?php
+            }
+            echo "</div>";
+            echo "</div>";
+          } else {
+            echo 'Erro ao consultar candidatos';
+          }
+          ?>
+        </div>
+
         <!-- Botões inferiores-->
         <div class="row">
           <div class="col-md-3"></div>
           <div class="col-md-3">
-            <button type="submit" class="btn btn btn-outline-success form-control">Cadastar</button>
+            <button type="submit" class="btn btn-outline-success form-control"><b>Cadastar</b></button>
           </div>
 
           <div class="col-md-3">
             <a href="listar_candidatos.php">
-              <button type="button" class="btn btn btn btn-outline-info form-control">Listar Candidatos</button>
+              <button type="button" class="btn btn-outline-info form-control"><b>Listar Candidatos</b></button>
             </a>
           </div>
           <div class="col-md-3"></div>
+          <div class="clearfix lista"><br></div>
         </div>
       </form>
-    </div>
+    </div><!-- Fim form-->
 
 
   </div>

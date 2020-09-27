@@ -7,7 +7,18 @@ $link = $objDb->conecta_mysql();
 
 $sql = "SELECT * FROM `candidatos`";
 
-$resultado_id = mysqli_query($link, $sql);
+$resultado = mysqli_query($link, $sql);
+
+$dados_candidatos = array();
+
+if ($resultado) {
+
+  while ($linha = mysqli_fetch_array($resultado, MYSQLI_ASSOC)) {
+    $dados_candidatos[] = $linha;
+  }
+} else {
+  echo 'Erro ao consultar candidatos';
+}
 
 ?>
 
@@ -33,31 +44,75 @@ $resultado_id = mysqli_query($link, $sql);
   <!-- Adicionando Javascript ViaCEP -->
   <script type="text/javascript" src="js/viacep.js"></script>
 
+  <link href="css/style.css" rel="stylesheet">
+
 </head>
 
 <body>
+  <!-- Header -->
+  <?php include 'header.php'; ?>
 
-  <?php
 
-  if ($resultado_id) {
-    while ($registro = mysqli_fetch_array($resultado_id, MYSQLI_ASSOC)) {
-      echo $registro['nome'] . ' ';
-      echo $registro['data_nascimento'] . ' ';
-    }
-  } else {
-    echo 'Erro ao consultar candidatos';
-  }
 
-  ?>
+  <div class="container">
 
-  <div class="col-md-4">
-    <a href="index.php">
-      <button type="button" class="btn btn btn btn-outline-info form-control">Voltar</button>
-    </a>
+    <h2 data-toggle="modal" data-target="#exampleModal">Abrir modal</h2>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Código</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Email</th>
+          <th scope="col">Telefone</th>
+          <th scope="col">Habilidades</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Fazer leitura do array do banco -->
+        <?php foreach ($dados_candidatos as $candidato) {
+          echo "<tr>";
+          echo "<th scope='row'>" . $candidato['codigo'] . "</th>";
+          echo "<td>" . $candidato['nome'] . "</td>";
+          echo "<td>" . $candidato['email'] . "</td>";
+          echo "<td>" . $candidato['telefone'] . "</td>";
+          echo "<td>" . $candidato['habilidades'] . "
+          <a href='' data-toggle='modal' data-target='#exampleModal'>Ver mais</a></td>";
+        }
+        echo "</tr>";
+        ?>
+        <!-- Fim leitura array -->
+      </tbody>
+    </table>
+
+    <div class="col-md-12 center">
+      <a href="index.php">
+        <button type="button" class="btn btn-outline-info"><b>Voltar<b></button>
+      </a>
+    </div>
+
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Cadastro completo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>texto</p>
+        </div>
+      </div>
+    </div>
   </div>
 
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="css/style.css" rel="stylesheet">
 </body>
 
 </html>
