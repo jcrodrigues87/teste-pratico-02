@@ -1,0 +1,14 @@
+.endereco,
+.dados {
+  display: flex;
+}
+
+.cabecalho {
+  margin-bottom: 2%;
+  color: blue;
+}
+
+.lista {
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
