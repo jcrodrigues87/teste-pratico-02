@@ -29,7 +29,7 @@
                 <div class="field-body">
                 <div class="field">
                     <p class="control is-expanded has-icons-left">
-                    <input class="input is-info" type="text" placeholder="ex: José Alencar Oliveira">
+                    <input class="input is-info" v-model="name" type="text" placeholder="ex: José Alencar Oliveira">
                     <span class="icon is-small is-left">
                         <i class="fas fa-user"></i>
                     </span>
@@ -43,7 +43,7 @@
                 <div class="field-body">
                     <div class="field">
                     <p class="control is-expanded has-icons-left">
-                        <input class="input is-info" type="email" placeholder="ex: josealencar@gmail.com">
+                        <input class="input is-info" v-model="email" type="email" placeholder="ex: josealencar@gmail.com">
                         <span class="icon is-small is-left">
                             <i class="fas fa-envelope"></i>
                         </span>
@@ -61,7 +61,7 @@
                 <div class="field-body">
                     <div class="field">
                     <div class="control">
-                        <input class="input is-info" type="tel" placeholder="ex: (DDD) 99999-9999">
+                        <input class="input is-info" v-model="telephone" type="tel" placeholder="ex: (DDD) 99999-9999">
                     </div>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
                 <div class="field-body">
                     <div class="field">
                     <div class="control">
-                        <input class="input is-info" type="date" placeholder="ex: 01/01/2000">
+                        <input class="input is-info" v-model="birth" type="date" placeholder="ex: 01/01/2000">
                     </div>
                     </div>
                 </div>
@@ -95,7 +95,7 @@
                 <div class="field-body">
                     <div class="field">
                     <div class="control">
-                        <input class="input is-info" type="text" placeholder="ex:12345-678">
+                        <input class="input is-info" v-model="cep" @input="getAdress" type="text" placeholder="ex: 12345678">
                     </div>
                     </div>
                 </div>
@@ -106,7 +106,7 @@
                 <div class="field-body">
                     <div class="field">
                     <div class="control">
-                        <input class="input is-info" type="text" placeholder="">
+                        <input class="input is-info" v-model="uf" type="text" placeholder="" readonly>
                     </div>
                     </div>
                 </div>
@@ -117,7 +117,7 @@
                 <div class="field-body">
                     <div class="field">
                     <div class="control">
-                        <input class="input is-info" type="text" placeholder="">
+                        <input class="input is-info" v-model="city" type="text" placeholder="" readonly>
                     </div>
                     </div>
                 </div>
@@ -132,7 +132,7 @@
                 <div class="field-body">
                     <div class="field">
                     <div class="control">
-                        <input class="input is-info" type="text" placeholder="">
+                        <input class="input is-info" v-model="street" type="text" placeholder="">
                     </div>
                     </div>
                 </div>
@@ -143,7 +143,7 @@
                 <div class="field-body">
                     <div class="field">
                     <div class="control">
-                        <input class="input is-info" type="text" placeholder="">
+                        <input class="input is-info" v-model="complement" type="text" placeholder="">
                     </div>
                     </div>
                 </div>
@@ -164,42 +164,42 @@
                 
                 <div class="column">
                     <label class="checkbox">
-                    <input type="checkbox">
+                    <input type="checkbox" v-model="skills['java']">
                         Java
                     </label>
                 </div>
 
                 <div class="column">
                     <label class="checkbox">
-                    <input type="checkbox">
+                    <input type="checkbox" v-model="skills['node']">
                         Node.js
                     </label>
                 </div>
 
                 <div class="column">
                     <label class="checkbox">
-                    <input type="checkbox">
+                    <input type="checkbox" v-model="skills['cpp']">
                         C++
                     </label>
                 </div>
 
                 <div class="column">
                     <label class="checkbox">
-                    <input type="checkbox">
+                    <input type="checkbox" v-model="skills['php']">
                         PHP
                     </label>
                 </div>
                 
                 <div class="column">
                     <label class="checkbox">
-                    <input type="checkbox">
+                    <input type="checkbox" v-model="skills['python']">
                         Python
                     </label>
                 </div>
 
                 <div class="column">
                     <label class="checkbox">
-                    <input type="checkbox">
+                    <input type="checkbox" v-model="skills['go']">
                         GO
                     </label>
                 </div>
@@ -210,42 +210,42 @@
                 
                 <div class="column">
                     <label class="checkbox">
-                    <input type="checkbox">
+                    <input type="checkbox" v-model="skills['advpl']">
                         ADVPL
                     </label>
                 </div>
 
                 <div class="column">
                     <label class="checkbox">
-                    <input type="checkbox">
+                    <input type="checkbox" v-model="skills['angular']">
                         Angular
                     </label>
                 </div>
 
                 <div class="column">
                     <label class="checkbox">
-                    <input type="checkbox">
+                    <input type="checkbox" v-model="skills['electron']">
                         Electron
                     </label>
                 </div>
 
                 <div class="column">
                     <label class="checkbox">
-                    <input type="checkbox">
+                    <input type="checkbox" v-model="skills['react']">
                         React
                     </label>
                 </div>
                 
                 <div class="column">
                     <label class="checkbox">
-                    <input type="checkbox">
+                    <input type="checkbox" v-model="skills['native']">
                         Native
                     </label>
                 </div>
 
                 <div class="column">
                     <label class="checkbox">
-                    <input type="checkbox">
+                    <input type="checkbox" v-model="skills['mongo']">
                         Mongo
                     </label>
                 </div>
@@ -256,35 +256,35 @@
                 
                 <div class="column">
                     <label class="checkbox">
-                    <input type="checkbox">
+                    <input type="checkbox" v-model="skills['sql']">
                         SQL
                     </label>
                 </div>
 
                 <div class="column">
                     <label class="checkbox">
-                    <input type="checkbox">
+                    <input type="checkbox" v-model="skills['sqlServer']">
                         SQLServer
                     </label>
                 </div>
 
                 <div class="column">
                     <label class="checkbox">
-                    <input type="checkbox">
+                    <input type="checkbox" v-model="skills['postgres']">
                         Postgres
                     </label>
                 </div>
 
                 <div class="column">
                     <label class="checkbox">
-                    <input type="checkbox">
+                    <input type="checkbox" v-model="skills['backend']">
                         Back-End
                     </label>
                 </div>
                 
                 <div class="column">
                     <label class="checkbox">
-                    <input type="checkbox">
+                    <input type="checkbox" v-model="skills['frontend']">
                         Front-End
                     </label>
                 </div>
@@ -294,21 +294,70 @@
 
 
 
-        <button class="button is-info is-rounded mx-4">Adicionar Formação</button>
+
+
+        <p class="buttons mx-4 is-centered">
+            <button class="button is-info is-rounded  " v-on:click="addFormation">Adicionar Formação</button>
+        </p>
+
+        <template v-for="item in formations">
+
+
+            <div class="box has-background-gray mb-0">
+
+                <div class="field is-horizontal ">
+    
+
+                    <div class="field-label is-normal ">
+                    <label class="label">Curso</label>
+                    </div>
+                    <div class="field-body">
+                    <div class="field">
+                        <input class="input is-info" v-model="item['course']" type="text" placeholder="ex: Ciência da Computação">
+                    </div>
+                    </div>
+                    
+
+                    <div class="field-label is-normal ">
+                        <label class="label">Curso</label>
+                        </div>
+                        <div class="field-body">
+                        <div class="field">
+                            <input class="input is-info" v-model="item['institute']" type="text" placeholder="ex: IFMG">
+                        </div>
+                    </div>
+
+
+                    <div class="field-label is-normal">
+                        <label class="label">Conclusão</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                        <div class="control">
+                            <input class="input is-info" v-model="item['conclusion']" type="date" placeholder="ex: 01/01/2000">
+                        </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </template>
+
 
 
 
         
         </br>
-        </br>
-        <p class="buttons mx-4" align="center">
-            <button class="button is-success is-rounded">
+        <p class="buttons mx-4 is-centered">
+            <button class="button is-success is-rounded" v-on:click="registerProfile">
                 <span class="icon is-small">
                   <i class="fas fa-check"></i>
                 </span>
                 <span>Cadastrar</span>
             </button>
-            <button class="button is-danger is-outlined is-rounded">
+            <button class="button is-danger is-outlined is-rounded" v-on:click="clearData">
                 <span>Limpar</span>
                 <span class="icon is-small">
                   <i class="fas fa-times"></i>
@@ -318,9 +367,9 @@
 
 
     </main>
-
+    
     <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="app.js" charset="utf-8"></script>
+    <script data-main="app" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.3/require.min.js" charset="utf-8"></script>
 </body>
 </html>
