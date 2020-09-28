@@ -86,7 +86,7 @@
 
             <div class="box has-background-white-ter" v-if="checkSkill">
 
-                <div class="columns is-variable is-1-mobile is-0-tablet is-3-desktop mx-3">
+                <div class="columns is-variable is-1-mobile is-0-tablet is-3-desktop mx-3 mb-0">
             
                     <div class="column">
                         <label class="checkbox">
@@ -215,6 +215,11 @@
                             Front-End
                         </label>
                     </div>
+
+                    <div class="column">
+                        <label class="checkbox">
+                        </label>
+                    </div>
     
                 </div>
 
@@ -223,16 +228,35 @@
 
         </template>
 
-        <template v-for="programer in programers">
-        <div class="box has-background-white-ter" v-if="programer.require">
-        
+
+
+
+        <div class="box has-background-primary-dark mb-0">
+            <div class="columns">
+                <div class="column is-1">Código</div>
+                <div class="column is-2">Nome</div>
+                <div class="column is-3">E-mail</div>
+                <div class="column is-2">Telefone</div>
+                <div class="column is-4">Habilidades</div>
+
+            </div>
+        </div>
+
+        <template v-for="programmer in programmers">
+        <div class="box has-background-primary mb-0" v-if="programmer.require">
 
             
-
+            <div class="columns">
+                <div class="column is-1">{{programmer.cod}}</div>
+                <div class="column is-2">{{programmer.name}}</div>
+                <div class="column is-3">{{programmer.email}}</div>
+                <div class="column is-2">{{programmer.telephone}}</div>
+                <div class="column is-4">{{skilled(programmer.skills)}}</div>
+            </div>
 
         </div>
         </template>
-    
+
 
 
     </main>
