@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro</title>
+    <title>Listagem</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
 </head>
 <body>
@@ -15,7 +15,7 @@
 
 
 
-        <div class="box has-background-grey-light ">
+        <div class="box has-background-grey-light pt-1 pb-1 mb-0">
 
             <h3 class="subtitle" align="center">
                 Filtrar por
@@ -25,21 +25,23 @@
                 
                 <div class="column">
                     <label class="checkbox">
-                    <input type="checkbox">
+                    <input type="checkbox" v-model="checkName">
                         Nome
                     </label>
                 </div>
 
                 <div class="column">
                     <label class="checkbox">
-                    <input type="checkbox">
+                    <input type="checkbox" v-model="checkSkill">
                         Habilidades
                     </label>
                 </div>
 
-                <div class="column">
+
+                <template>
+                <div class="column" v-if="checkName || checkSkill">
                     <p class="buttons" align="center">
-                        <button class="button is-info is-rounded">
+                        <button class="button is-info is-rounded" v-on:click="filter">
                             <span>Filtrar</span>
                             <span class="icon is-small">
                               <i class="fas fa-eye"></i>
@@ -47,18 +49,197 @@
                         </button>
                     </p>
                 </div>
+                </template>
+
 
             </div>
         </div>
 
 
 
-    </div>
+
+
+        <template>
+
+
+            <div class="box has-background-grey-lighter mb-0" v-if="checkName">
+
+                <div class="field is-horizontal" >
+
+                    <div class="field-label is-normal mb-0">
+                    <label class="label">Curso</label>
+                    </div>
+                    <div class="field-body">
+                    <div class="field">
+                        <p class="control is-expanded has-icons-left">
+                            <input class="input is-info" v-model="name" type="text" placeholder="ex: José Alencar Oliveira">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-user"></i>
+                            </span>
+                            </p>
+                    </div>
+                    </div>
+                </div>
+            </div>
+                    
+
+
+            <div class="box has-background-white-ter" v-if="checkSkill">
+
+                <div class="columns is-variable is-1-mobile is-0-tablet is-3-desktop mx-3">
+            
+                    <div class="column">
+                        <label class="checkbox">
+                        <input type="checkbox" v-model="skills['java']">
+                            Java
+                        </label>
+                    </div>
+    
+                    <div class="column">
+                        <label class="checkbox">
+                        <input type="checkbox" v-model="skills['node']">
+                            Node.js
+                        </label>
+                    </div>
+    
+                    <div class="column">
+                        <label class="checkbox">
+                        <input type="checkbox" v-model="skills['cpp']">
+                            C++
+                        </label>
+                    </div>
+    
+                    <div class="column">
+                        <label class="checkbox">
+                        <input type="checkbox" v-model="skills['php']">
+                            PHP
+                        </label>
+                    </div>
+                    
+                    <div class="column">
+                        <label class="checkbox">
+                        <input type="checkbox" v-model="skills['python']">
+                            Python
+                        </label>
+                    </div>
+    
+                    <div class="column">
+                        <label class="checkbox">
+                        <input type="checkbox" v-model="skills['go']">
+                            GO
+                        </label>
+                    </div>
+    
+                </div>
+        
+
+                <div class="columns is-variable is-1-mobile is-0-tablet is-3-desktop mx-3">
+                    
+                    <div class="column">
+                        <label class="checkbox">
+                        <input type="checkbox" v-model="skills['advpl']">
+                            ADVPL
+                        </label>
+                    </div>
+    
+                    <div class="column">
+                        <label class="checkbox">
+                        <input type="checkbox" v-model="skills['angular']">
+                            Angular
+                        </label>
+                    </div>
+    
+                    <div class="column">
+                        <label class="checkbox">
+                        <input type="checkbox" v-model="skills['electron']">
+                            Electron
+                        </label>
+                    </div>
+    
+                    <div class="column">
+                        <label class="checkbox">
+                        <input type="checkbox" v-model="skills['react']">
+                            React
+                        </label>
+                    </div>
+                    
+                    <div class="column">
+                        <label class="checkbox">
+                        <input type="checkbox" v-model="skills['native']">
+                            Native
+                        </label>
+                    </div>
+    
+                    <div class="column">
+                        <label class="checkbox">
+                        <input type="checkbox" v-model="skills['mongo']">
+                            Mongo
+                        </label>
+                    </div>
+    
+                </div>
+        
+                <div class="columns is-variable is-1-mobile is-0-tablet is-3-desktop mx-3">
+                    
+                    <div class="column">
+                        <label class="checkbox">
+                        <input type="checkbox" v-model="skills['sql']">
+                            SQL
+                        </label>
+                    </div>
+    
+                    <div class="column">
+                        <label class="checkbox">
+                        <input type="checkbox" v-model="skills['sqlServer']">
+                            SQLServer
+                        </label>
+                    </div>
+    
+                    <div class="column">
+                        <label class="checkbox">
+                        <input type="checkbox" v-model="skills['postgres']">
+                            Postgres
+                        </label>
+                    </div>
+    
+                    <div class="column">
+                        <label class="checkbox">
+                        <input type="checkbox" v-model="skills['backend']">
+                            Back-End
+                        </label>
+                    </div>
+                    
+                    <div class="column">
+                        <label class="checkbox">
+                        <input type="checkbox" v-model="skills['frontend']">
+                            Front-End
+                        </label>
+                    </div>
+    
+                </div>
+
+
+            </div>
+
+        </template>
+
+        <template v-for="programer in programers">
+        <div class="box has-background-white-ter" v-if="programer.require">
+        
+
+            
+
+
+        </div>
+        </template>
+    
+
 
     </main>
 
     <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="app2.js" charset="utf-8"></script>
+
 </body>
 </html>
