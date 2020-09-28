@@ -3,13 +3,20 @@ from django.db import models
 # Create your models here.
 
 class Profiles(models.Model):
-    #models.CharField()
+    # Principal Data
     nome = models.CharField(max_length=100, help_text="DD/MM/AAAA")
     nascimento = models.CharField(max_length=10, help_text="DD/MM/AAAA")
     email = models.EmailField(max_length=254)
     telefone = models.CharField(max_length=16, help_text="(DDD) 9XXXX-XXXX")
+    
+    # Adress
     cep = models.CharField(max_length=16, help_text="XXXXX-XXX")
+    uf = models.CharField(max_length=2)
+    cidade = models.CharField(max_length=100)
+    logradouro = models.CharField(max_length=100)
+    complemento = models.CharField(max_length=100)
 
+    # Skills
     JAVA = models.BooleanField('Java', default=False)
     NODE = models.BooleanField('Node.js', default=False)
     CPP = models.BooleanField("C++", default=False)
@@ -28,3 +35,5 @@ class Profiles(models.Model):
     BACKEND = models.BooleanField("Backend", default=False)
     FRONTEND = models.BooleanField("Front-End", default=False)
 
+    # Education
+    formacoes = models.ManyToManyField()
