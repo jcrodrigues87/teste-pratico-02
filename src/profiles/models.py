@@ -36,4 +36,4 @@ class Profiles(models.Model):
     FRONTEND = models.BooleanField("Front-End", default=False)
 
     # Education
-    formacoes = models.ManyToManyField()
+    #formacoes = models.ManyToManyField()

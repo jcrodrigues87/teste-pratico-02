@@ -13,8 +13,7 @@ from .models import Profiles
 def profileOverview(request):
 
     response_urls = {
-        'List':'/profile-list/', 
-        'Create':'/profile-create/'
+        'List':'/profile-list/', 'Create':'/profile-create/'
         }
 
     return Response(response_urls)
@@ -34,7 +33,9 @@ def profileCreate(request):
 	return Response(serializer.data)
     '''
     
-    
+
+
+
 @api_view(['GET'])
 def profileList(request):
 	profiles = Profiles.objects.all().order_by('-id')

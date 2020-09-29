@@ -5,7 +5,7 @@
 // });
 
 
-// const axios = require('axios');
+//const axios = require('axios');
 
 const app = new Vue({
     el: '#app',
@@ -93,11 +93,25 @@ const app = new Vue({
 
         },
 
+        clearFormation: function(){
+          this.formations = []
+        },
+
         async getAdress () {
             if (this.cep.length == 8) { 
                 
-              //let resposta = await axios.get("https://viacep.com.br/ws/" + this.cep + "/json/")
-              //print(resposta)
+              let resposta = await axios.get("https://viacep.com.br/ws/" + this.cep + "/json/")
+              var dados = resposta.data
+
+              if (!dados['erro'] == undefined)
+                return false
+              
+              this.uf = dados['uf']
+              this.city = dados['localidade'] 
+              this.street = dados['logradouro']
+              this.complement = dados['complemento']                
+
+              console.log(resposta.data)
               //this.endereco = resposta.data
             }
         },
