@@ -1,24 +1,9 @@
 <?php
 
 require_once('database/db.class.php');
+require_once('controller/busca_candidatos.php');
 
-$objDb = new db();
-$link = $objDb->conecta_mysql();
-
-$sql = "SELECT * FROM `candidatos`";
-
-$resultado = mysqli_query($link, $sql);
-
-$dados_candidatos = array();
-
-if ($resultado) {
-
-  while ($linha = mysqli_fetch_array($resultado, MYSQLI_ASSOC)) {
-    $dados_candidatos[] = $linha;
-  }
-} else {
-  echo 'Erro ao consultar candidatos';
-}
+$dados_candidatos = busca_candidatos();
 
 ?>
 
@@ -56,7 +41,7 @@ if ($resultado) {
 
   <div class="container">
 
-    <h2 data-toggle="modal" data-target="#exampleModal">Abrir modal</h2>
+    <!-- <h2 data-toggle="modal" data-target="#exampleModal">Abrir modal</h2> -->
 
     <table class="table table-striped">
       <thead>
@@ -69,7 +54,7 @@ if ($resultado) {
         </tr>
       </thead>
       <tbody>
-        <!-- Fazer leitura do array do banco -->
+        <!-- Fazer leitura do array retornando do banco -->
         <?php foreach ($dados_candidatos as $candidato) {
           echo "<tr>";
           echo "<th scope='row'>" . $candidato['codigo'] . "</th>";
@@ -104,7 +89,7 @@ if ($resultado) {
           </button>
         </div>
         <div class="modal-body">
-          <p>texto</p>
+          <p>Dados completos Dados completos Dados completos Dados completos</p>
         </div>
       </div>
     </div>

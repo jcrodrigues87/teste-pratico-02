@@ -1,6 +1,6 @@
 <?php
 
-require_once('database/db.class.php');
+require_once('../database/db.class.php');
 
 //Super global post e get são como arrays associativos
 $nome = $_POST['nome'];

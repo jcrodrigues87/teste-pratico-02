@@ -37,9 +37,10 @@
   width: 200px;
 }
 
-.habilidades {
+.habilidades,
+.formacoes {
   border: 1px solid rgb(170, 169, 169);
-  padding: 2%;
+  padding: 1%;
   border-radius: 5px;
   margin-bottom: 1%;
 }
