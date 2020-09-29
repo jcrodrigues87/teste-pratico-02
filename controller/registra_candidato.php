@@ -2,12 +2,26 @@
 
 require_once('../database/db.class.php');
 
-//Super global post e get são como arrays associativos
+/* Recebendo os dados atraves da super global post*/
 $nome = $_POST['nome'];
+$cep = $_POST['cep'];
 $email = $_POST['email'];
+$logradouro = $_POST['logradouro'];
+$complemento = $_POST['complemento'];
+$data_nasc = $_POST['data_nasc'];
+$bairro = $_POST['bairro'];
+$cidade = $_POST['cidade'];
+$uf = $_POST['uf'];
+$telefone = $_POST['telefone'];
+$curso = $_POST['curso']; //Array de cursos
+$instituicao = $_POST['instituicao']; //Array de institituiçao
+$conclusao = $_POST['conclusao']; //Array de conclusão
+$habilidades = implode(", ", $_POST['habilidades']); //Array de habilidades
 
-//Variáveis de controle
+
+/* Variável de controle */
 $email_existe = false;
+$codido_candidato[] = null;
 
 $objDb = new db();
 $link = $objDb->conecta_mysql();
@@ -26,18 +40,42 @@ if ($resultado_id) {
 
 //Se o E-mail existir
 if ($email_existe) {
-  $retorno_get .= "erro_email=1&";
-  header('Location: index.php?' . $retorno_get);
-  die(); //interrompe a execução do script
+  echo "Este e-mail já se encontra cadastrado";
 }
+/** Inserindo o candidato no banco */
+$sql = "INSERT INTO candidatos (nome, data_nascimento, email, telefone, logradouro, cep, habilidades, complemento) 
+VALUES ('$nome', '$data_nasc', '$email', '$telefone', '$logradouro', '$cep', '$habilidades', '$complemento')";
 
-//Se não existir faz o cadastro no banco
-$sql = "insert into usuarios (nome, email, cep) values ('$nome', '$email', '$cep') ";
 
-//executar a query, funcão usa como parametro o link de conexão e a query
-//a funçao mysqli_query retorna false se houver algun erro
+//Executando a query e testando se não houve erro
 if (mysqli_query($link, $sql)) {
-  echo "Cadastro efetuado com sucesso!";
+  echo "Candidato cadastrato com sucesso! <br>";
+
+  //Buscar o codigo do candidato no banco atraves do email
+  $sql = "SELECT codigo, email FROM candidatos WHERE email = '$email'";
+  $resultado2 = mysqli_query($link, $sql);
+
+  if ($resultado2) {
+    $linha = mysqli_fetch_array($resultado2, MYSQLI_ASSOC);
+    $codido_candidato = $linha['codigo'];
+  } else {
+    echo 'Erro ao consultar candidato <br>';
+  }
+  //Inserindo suas respectivas fomaçoes
+  for ($i = 0; $i < count($curso); $i++) {
+    if ($curso[$i] != "" && $instituicao[$i] != "" && $conclusao[$i] != "") {
+      $sql = "INSERT INTO formacoes(nome_do_curso, nome_da_instituicao, data_conclusao, cod_candidato) 
+      VALUES ('$curso[$i]','$instituicao[$i]','$conclusao[$i]','$codido_candidato')";
+      if (mysqli_query($link, $sql)) {
+        echo "Formação do candidato cadastrada com sucesso!";
+      } else {
+        echo "Erro ao registrar Formação do usuário!";
+      }
+    }
+  }
+
+
+  $codido_candidato = 5; //apenas para teste por enquanto
 } else {
   echo "Erro ao registrar usuário!";
 }

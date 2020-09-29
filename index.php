@@ -53,8 +53,7 @@ $resultado = busca_habilidades();
     }
   </script>
 
-
-
+  <!-- Meus CSS -->
   <link href="css/style.css" rel="stylesheet">
 
 </head>
@@ -70,19 +69,12 @@ $resultado = busca_habilidades();
       <form method="post" action="controller/registra_candidato.php">
 
         <div class="row">
-          <div class="col-md-6">
-          </div>
-          <div class="col-md-6">
-          </div>
-        </div>
-
-        <div class="row">
           <!-- Endereço ViaCEP -->
           <div class="col-md-6">
             <label for="">Nome completo:</label>
             <input name="nome" type="text" class="form-control" id="nome" placeholder="Nome completo" required>
             <input name="cep" type="text" class="form-control" id="cep" value="" maxlength="9" placeholder="CEP" required />
-            <input name="rua" type="text" class="form-control" id="rua" placeholder="Logradouro" required />
+            <input name="logradouro" type="text" class="form-control" id="logradouro" placeholder="Logradouro" required />
             <input name="complemento" type="text" class="form-control" id="complemento" placeholder="Complemento" />
             <input name="email" type="email" class="form-control" id="email" placeholder="Email" required>
           </div>
@@ -136,7 +128,7 @@ $resultado = busca_habilidades();
             while ($registro = mysqli_fetch_array($resultado, MYSQLI_ASSOC)) {
           ?>
               <div class="col-md-2">
-                <input type="checkbox" class="form-check-input" value=<?= $registro['nome'] ?> />
+                <input type="checkbox" class="form-check-input" name="habilidades[]" value=<?= $registro['nome'] ?> />
                 <label class="form-check-label" for="materialUnchecked"> <?= $registro['nome'] ?> </label>
               </div>
           <?php
@@ -167,7 +159,6 @@ $resultado = busca_habilidades();
       </form>
       <!-- Fim do Formulário-->
     </div>
-
 
   </div>
 
