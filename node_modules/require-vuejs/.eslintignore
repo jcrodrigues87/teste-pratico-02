@@ -1,6 +1,0 @@
-node_modules/*
-dist/*
-examples/require-vuejs.js
-examples/node_modules/*
-examples/dist/*
-coverage/*
