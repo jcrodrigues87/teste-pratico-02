@@ -6,8 +6,8 @@
 
 ### Instruções para criar e popular o banco de dados MySQL:
 
-4 - Acessar: http://localhost/phpmyadmin/
-5 - Criar o bando: `CREATE DATABASE testecanex;`
+4 - Acessar: http://localhost/phpmyadmin/ <br>
+5 - Criar o bando: `CREATE DATABASE testecanex;` <br>
 6 - Entrar no banco e importar o arquivo `testecanex.sql`
 
 ### Adicionando o projeto no servidor Apache local:
