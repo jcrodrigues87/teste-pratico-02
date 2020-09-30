@@ -346,11 +346,11 @@ export default {
     registerProfile: function () {
       if (!this.validations()) return false;
 
-      var f = this.convertFormationstoJson();
-      // console.log(formations)
+      let f = JSON.stringify(this.formations);
 
-      var programmer = this.saveProgrammer(f);
-      console.log(programmer);
+      let programmer = this.saveProgrammer(f);
+      
+      axios.post('http://localhost:8000/profiles/profile-create/', programmer)
 
       return true;
     },
@@ -421,23 +421,6 @@ export default {
 
     emptyField: function () {
       return false;
-    },
-
-    convertFormationstoJson: function () {
-      var saving = "[\n";
-      var form;
-      for (let i = 0; i < this.formations.length; i++) {
-        form = this.formations[i];
-        saving += "{\n";
-        saving += '"course" : "' + form["course"] + '",\n';
-        saving += '"institute" : "' + form["institute"] + '",\n';
-        saving += '"conclusion" : "' + form["conclusion"] + '"\n';
-        saving += "},\n";
-      }
-      saving = saving.slice(0, -2);
-      saving += "\n]";
-
-      return saving;
     },
 
     saveProgrammer: function (f) {

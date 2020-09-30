@@ -20,31 +20,18 @@ def profileOverview(request):
 
     return Response(response_urls)
 
-
-@api_view(['GET'])
+@api_view(['POST'])
 def profileCreate(request):
-
-    print(request)
-
-    return render(request, 'createProfile.html')
-    
-    '''
     serializer = ProfileSerializer(data=request.data)
 
-	if serializer.is_valid():
-		serializer.save()
-
-	return Response(serializer.data)
-    '''
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    else:
+        return Response(serializer.errors)
     
-
-
-
 @api_view(['GET'])
 def profileList(request):
     profiles = Profiles.objects.all()
-    if profiles:
-        ordProfiles = profiles.order_by('-id')
-        serializer = ProfileSerializer(profiles, many=True)
-        return Response(serializer)
-    return Response()
+    serializer = ProfileSerializer(profiles, many=True)
+    return Response(serializer.data)
