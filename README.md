@@ -12,6 +12,6 @@
 
 ### Adicionando o projeto no servidor Apache local:
 
-Apenas copiar o conteúdo do projeto testes-pratico-02 para a pasta htdocs.
+Apenas copiar o conteúdo do projeto teste-pratico-02 para a pasta htdocs.
 O usuário e senha do banco de dados podem ser alterados na classe `db.class.php`.
 Com Apache já iniciado basta acessar http://localhost/
