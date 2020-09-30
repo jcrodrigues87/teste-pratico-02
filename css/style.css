@@ -4,12 +4,13 @@
   justify-content: center;
 }
 
-.cabecalho {
+.header {
   margin-bottom: 2%;
-  color: green;
+  color: #28a745;
 }
 
-.lista {
+.lista,
+.buscar {
   margin-top: 2%;
   margin-bottom: 2%;
 }
@@ -43,4 +44,8 @@
   padding: 1%;
   border-radius: 5px;
   margin-bottom: 1%;
+}
+
+.btn-buscar {
+  margin-left: 2%;
 }

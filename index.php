@@ -29,7 +29,7 @@ $resultado = busca_habilidades();
   <script type="text/javascript" src="js/viacep.js"></script>
 
 
-  <!-- Script adiciomar outra formação -->
+  <!-- Script adiciona outra formação -->
   <script type="text/javascript">
     function add_row() {
       $rowno = $("#employee_table tr").length;
@@ -73,7 +73,7 @@ $resultado = busca_habilidades();
           <div class="col-md-6">
             <label for="">Nome completo:</label>
             <input name="nome" type="text" class="form-control" id="nome" placeholder="Nome completo" required>
-            <input name="cep" type="text" class="form-control" id="cep" value="" maxlength="9" placeholder="CEP" required />
+            <input name="cep" type="text" class="form-control" id="cep" value="" maxlength="9" placeholder="CEP: 37928-000" required />
             <input name="logradouro" type="text" class="form-control" id="logradouro" placeholder="Logradouro" required />
             <input name="complemento" type="text" class="form-control" id="complemento" placeholder="Complemento" />
             <input name="email" type="email" class="form-control" id="email" placeholder="Email" required>
@@ -93,9 +93,9 @@ $resultado = busca_habilidades();
         <!-- Formações-->
         <div class="formacoes">
           <h6>Informe suas formações:</h6>
-
           <div class="row">
             <div class="col-md-12">
+
               <table id="employee_table" align="center">
                 <tr id="row1">
                   <td>
@@ -112,8 +112,11 @@ $resultado = busca_habilidades();
                   </td>
                 </tr>
               </table>
+
               <button type="button" onclick="add_row();" class="btn btn-outline-success">
-                <b>Clique aqui para adicionar uma nova formação</b></button>
+                Clique aqui para adicionar uma nova formação
+              </button>
+
             </div>
           </div>
         </div>
@@ -128,8 +131,8 @@ $resultado = busca_habilidades();
             while ($registro = mysqli_fetch_array($resultado, MYSQLI_ASSOC)) {
           ?>
               <div class="col-md-2">
-                <input type="checkbox" class="form-check-input" name="habilidades[]" value=<?= $registro['nome'] ?> />
-                <label class="form-check-label" for="materialUnchecked"> <?= $registro['nome'] ?> </label>
+                <input type="checkbox" name="habilidades[]" value=<?= $registro['nome'] ?> />
+                <label class="form-check-label"> <?= $registro['nome'] ?> </label>
               </div>
           <?php
             }

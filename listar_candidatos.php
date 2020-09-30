@@ -1,9 +1,6 @@
 <?php
 
 require_once('database/db.class.php');
-require_once('controller/busca_candidatos.php');
-
-$dados_candidatos = busca_candidatos();
 
 ?>
 
@@ -31,44 +28,47 @@ $dados_candidatos = busca_candidatos();
 
   <link href="css/style.css" rel="stylesheet">
 
+  <script>
+    $(document).ready(function() {
+      //Requisição Ajax para a página busca_candidatos 
+      //se obtiver sucesso insere os dados na div candidatos
+      $("#btn_buscar_candidato").click(function() {
+        if ($("#nome_candidato").val().length > 0) {
+          console.log("dentro do if tamanho")
+          $.ajax({
+            url: 'busca_candidatos.php',
+            method: 'post',
+            data: $('#form_busca_candidato').serialize(),
+            success: function(data) {
+              $('#candidatos').html(data)
+              //console.log(data)
+            }
+          })
+        }
+      })
+      // FUNÇÃO VER DETALHES
+    })
+  </script>
+
 </head>
 
 <body>
   <!-- Header -->
   <?php include 'header.php'; ?>
 
-
-
   <div class="container">
 
-    <!-- <h2 data-toggle="modal" data-target="#exampleModal">Abrir modal</h2> -->
+    <div class="buscar">
+      <form id="form_busca_candidato" class="input-group">
+        <input type="text" id="nome_candidato" name="nome_candidato" class="form-control" placeholder="Digite o nome ou habidades do candidato" />
+        <button class="btn btn-outline-success btn-buscar" id="btn_buscar_candidato" type="button"> Buscar </button>
+      </form>
+    </div>
 
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">Código</th>
-          <th scope="col">Nome</th>
-          <th scope="col">Email</th>
-          <th scope="col">Telefone</th>
-          <th scope="col">Habilidades</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Fazer leitura do array retornando do banco -->
-        <?php foreach ($dados_candidatos as $candidato) {
-          echo "<tr>";
-          echo "<th scope='row'>" . $candidato['codigo'] . "</th>";
-          echo "<td>" . $candidato['nome'] . "</td>";
-          echo "<td>" . $candidato['email'] . "</td>";
-          echo "<td>" . $candidato['telefone'] . "</td>";
-          echo "<td>" . $candidato['habilidades'] . "
-          <a href='' data-toggle='modal' data-target='#exampleModal'>Ver mais</a></td>";
-        }
-        echo "</tr>";
-        ?>
-        <!-- Fim leitura array -->
-      </tbody>
-    </table>
+
+    <div id="candidatos">
+      Os candidatos seram listados aqui...
+    </div>
 
     <div class="col-md-12 center">
       <a href="index.php">
@@ -76,23 +76,6 @@ $dados_candidatos = busca_candidatos();
       </a>
     </div>
 
-  </div>
-
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Cadastro completo</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p>Dados completos Dados completos Dados completos Dados completos</p>
-        </div>
-      </div>
-    </div>
   </div>
 
 
