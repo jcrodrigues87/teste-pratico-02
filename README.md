@@ -1,17 +1,17 @@
-### Requisitos para rodar a Aplicação Web PHP:
+### Requisitos para rodar a Aplicação Web PHP na máquina local:
 
-Instalar o pacote XAMPP Control v3.2.4 com as configurações padrão.
-Excluir os arquivos contidos na pasta htdocs do Apache, localizada em C:\xampp\htdocs.
-Iniciar os dois servidores Apache e MySQL.
+1 - Pacote XAMPP Control na última versão e com as configurações padrão.<br>
+2 - Excluir os arquivos padrão do Apache da pasta htdocs, localizada em C:\xampp\htdocs. <br>
+3 - Iniciar os dois serviços Apache e MySQL no XAMPP Control.
 
 ### Instruções para criar e popular o banco de dados MySQL:
 
-Acessar: http://localhost/phpmyadmin/
-Criar o bando: `CREATE DATABASE testecanex;`
-Entrar no banco e importar o arquivo testecanex.sql
+4 - Acessar: http://localhost/phpmyadmin/
+5 - Criar o bando: `CREATE DATABASE testecanex;`
+6 - Entrar no banco e importar o arquivo `testecanex.sql`
 
-### Instruções para adicionar o projeto no servidor Apache:
+### Adicionando o projeto no servidor Apache local:
 
-Necessário apenas copiar o conteúdo do projeto testes-pratico-02 para a pasta htdocs.
+Apenas copiar o conteúdo do projeto testes-pratico-02 para a pasta htdocs.
 O usuário e senha do banco de dados podem ser alterados na classe `db.class.php`.
 Com Apache já iniciado basta acessar http://localhost/
