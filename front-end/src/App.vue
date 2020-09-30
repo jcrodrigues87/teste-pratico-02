@@ -1,12 +1,6 @@
 <template>
   <div id="app">
     <nav class="navbar is-info" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <router-link class="navbar-item has-text-weight-bold" to="/">
-          Portal de Talentos
-        </router-link>
-      </div>
-
       <div class="navbar-menu">
         <div class="navbar-start">
           <router-link class="navbar-item" to="/">Lista de Programadores</router-link>

@@ -41,6 +41,7 @@ class Profiles(models.Model):
     # Education
     #formacoes = models.ManyToManyField()
 
+    '''
     def save(self, *args, **kwargs):
         # This means that the model isn't saved to the database yet
         if self._state.adding:
@@ -53,3 +54,4 @@ class Profiles(models.Model):
                 self.cod = cod + 1
 
         super(Profiles, self).save(*args, **kwargs)
+    '''

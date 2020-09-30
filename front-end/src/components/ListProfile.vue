@@ -211,7 +211,7 @@
     <template v-for="(programmer, idx) in programmers">
       <div
         class="box has-background-primary mb-0"
-        :key="idx"
+        :key="idx" v-if="programmer.require"
       >
         <div class="columns">
           <div class="column is-1">{{ programmer.cod }}</div>
@@ -275,16 +275,42 @@ export default {
         frontend: false,
       },
 
+      programmers: []
+
     };
   },
+
   async created () {
     this.fetchProfiles()
   },
+
   methods: {
     fetchProfiles: function () {
       axios.get('http://localhost:8000/profiles/profile-list/')
         .then((response) => {
           this.programmers = response.data
+          for (let i in this.programmers){
+            this.programmers[i].require = true
+            this.programmers[i].skills = {
+              java: this.programmers[i].java,
+              node: this.programmers[i].node,
+              cpp: this.programmers[i].cpp,
+              php: this.programmers[i].php,
+              python: this.programmers[i].python,
+              go: this.programmers[i].go,
+              advpl: this.programmers[i].advpl,
+              angular: this.programmers[i].angular,
+              electron: this.programmers[i].electron,
+              react: this.programmers[i].react,
+              native: this.programmers[i].native,
+              mongo: this.programmers[i].mongo,
+              sql: this.programmers[i].sql,
+              sqlServer: this.programmers[i].sqlServer,
+              postgres: this.programmers[i].postgres,
+              backend: this.programmers[i].backend,
+              frontend: this.programmers[i].frontend,
+            }
+          }
         })
     },
 
@@ -299,6 +325,8 @@ export default {
           this.programmers[i].require = true;
         else this.programmers[i].require = false;
       }
+
+      this.$forceUpdate();
     },
 
     filter_name: function (dev) {
@@ -314,7 +342,7 @@ export default {
 
     skilled: function (skills) {
       var list = [];
-      for (let skill in skills) if (skills[skill]) list.push(skill);
+      for (let skill in this.skills) if (skills[skill]) list.push(skill);
 
       return this.listToStr(list);
     },
