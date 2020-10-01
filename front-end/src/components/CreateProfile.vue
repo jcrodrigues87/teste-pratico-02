@@ -307,6 +307,8 @@ export default {
       street: "",
       complement: "",
 
+      programmers: [],
+
       skills: {
         java: false,
         node: false,
@@ -330,7 +332,19 @@ export default {
     }
   },
 
+  async created () {
+    this.fetchProfiles()
+  },
+
   methods: {
+
+    fetchProfiles: function () {
+      axios.get('http://localhost:8000/profiles/profile-list/')
+        .then((response) => {
+          this.programmers = response.data
+        })
+    },
+
     addFormation: function () {
       this.formations.push({
         course: "",
@@ -344,10 +358,13 @@ export default {
     },
 
     registerProfile: function () {
-      if (!this.validations()) return false;
+      let vali = this.validations()
+      // console.log(vali)
+      // console.log(!vali)
+      if (!vali) return false;
 
       let f = JSON.stringify(this.formations);
-
+      // console.log("2 Atravessei o impossivel")
       let programmer = this.saveProgrammer(f);
       
       axios.post('http://localhost:8000/profiles/profile-create/', programmer)
@@ -395,7 +412,9 @@ export default {
     },
 
     validations: function () {
-      if (!this.emailVal()) return false;
+      let e = this.emailVal()
+      // console.log(e)
+      if (!e) return false;
       if (!this.telephoneVal()) return false;
       if (!this.birthVal()) return false;
       if (!this.cepVal()) return false;
@@ -404,7 +423,16 @@ export default {
     },
 
     emailVal: function () {
-      return true;
+
+      for (let i in this.programmers){
+        if (this.email == this.programmers[i].email){
+          // console.log("1 Email repetido");
+          alert("Email já cadastrado")
+          return false
+        }
+      }
+
+      return true
     },
 
     telephoneVal: function () {

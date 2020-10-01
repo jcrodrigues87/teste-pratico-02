@@ -10,14 +10,14 @@
       >
         <div class="column">
           <label class="checkbox">
-            <input type="checkbox" v-model="checkName" />
+            <input type="checkbox" v-model="checkName" v-on:change="cleanCheckName" />
             Nome
           </label>
         </div>
 
         <div class="column">
           <label class="checkbox">
-            <input type="checkbox" v-model="checkSkill" />
+            <input type="checkbox" v-model="checkSkill" v-on:change="cleanCheckSkill"/>
             Habilidades
           </label>
         </div>
@@ -327,6 +327,18 @@ export default {
       }
 
       this.$forceUpdate();
+    },
+
+    cleanCheckName: function () {
+      this.name = ''
+      this.filter()
+    },
+
+    cleanCheckSkill: function () {
+      for (let skill in this.skills) {
+        this.skills[skill] = false;
+      }
+      this.filter()
     },
 
     filter_name: function (dev) {

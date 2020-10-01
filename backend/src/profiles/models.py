@@ -6,9 +6,9 @@ class Profiles(models.Model):
     # Principal Data
     name = models.CharField(max_length=100, help_text="DD/MM/AAAA")
     birth = models.CharField(max_length=10, help_text="DD/MM/AAAA")
-    email = models.EmailField(max_length=254, primary_key=True)
+    email = models.CharField(max_length=100, unique=True)
     telephone = models.CharField(max_length=16, help_text="(DDD) 9XXXX-XXXX")
-    cod = models.IntegerField(default=1)
+    cod = models.AutoField(primary_key=True)
     
     # Adress
     cep = models.CharField(max_length=16, help_text="XXXXX-XXX")
