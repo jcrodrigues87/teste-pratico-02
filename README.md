@@ -11,6 +11,8 @@
 
 * Ative o ambiente virtual com o comando 'source bin/activate'
 
+* Instale o pacote setuptools primeiramente com 'pip3 install -U setuptools'
+
 * Intale os requisitos com o comando 'pip3 install -r requirements.txt'
 
 * Entre na pasta src 'cd src'
