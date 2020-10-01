@@ -38,7 +38,7 @@ if ($resultado_id) {
   echo "Erro ao tentar localizar registro de E-mail";
 }
 
-//Se o E-mail existir
+//Se o E-mail já existir
 if ($email_existe) {
   echo "Este e-mail já se encontra cadastrado";
 }
@@ -61,7 +61,7 @@ if (mysqli_query($link, $sql)) {
   } else {
     echo 'Erro ao consultar candidato <br>';
   }
-  //Inserindo suas respectivas fomaçoes
+  //Inserindo as Formações do candidato somente apos sua inserção no banco
   for ($i = 0; $i < count($curso); $i++) {
     if ($curso[$i] != "" && $instituicao[$i] != "" && $conclusao[$i] != "") {
       $sql = "INSERT INTO formacoes(nome_do_curso, nome_da_instituicao, data_conclusao, cod_candidato) 
@@ -73,9 +73,6 @@ if (mysqli_query($link, $sql)) {
       }
     }
   }
-
-
-  $codido_candidato = 5; //apenas para teste por enquanto
 } else {
   echo "Erro ao registrar usuário!";
 }

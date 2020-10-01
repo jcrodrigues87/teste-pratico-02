@@ -11,7 +11,7 @@ $link = $objDb->conecta_mysql();
 //Buscando candidato por nome ou habilidades
 $sql = "SELECT * FROM candidatos
   WHERE nome LIKE '%$nome_candidato%' 
-  OR habilidades LIKE '%$nome_candidato%'; ";
+  OR habilidades LIKE '%$nome_candidato%'";
 
 
 $resultado = mysqli_query($link, $sql);
@@ -38,12 +38,11 @@ if ($resultado) {
     echo '<td>' . $registro_cad["telefone"] . '</td>';
     echo '<td>' . $registro_cad["habilidades"];
     //Btn ver mais
-    echo '<button class="btn btn-link" id="btn_ver_mais" type="button"> Ver mais</button></td>';
-
+    echo '<button class="btn btn-link" value=' . $registro_cad["codigo"] .
+      ' type="button"> Ver mais</button></td>';
     echo '</tr>';
   }
-
   echo '</tbody> </table>';
 } else {
-  echo 'Erro na consulta de usuarios no banco de dados';
+  echo 'Erro na consulta de candidatos no banco de dados';
 }

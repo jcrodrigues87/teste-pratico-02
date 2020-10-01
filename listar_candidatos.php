@@ -34,9 +34,9 @@ require_once('database/db.class.php');
       //se obtiver sucesso insere os dados na div candidatos
       $("#btn_buscar_candidato").click(function() {
         if ($("#nome_candidato").val().length > 0) {
-          console.log("dentro do if tamanho")
+          //console.log("dentro do if tamanho")
           $.ajax({
-            url: 'busca_candidatos.php',
+            url: 'get_candidatos.php',
             method: 'post',
             data: $('#form_busca_candidato').serialize(),
             success: function(data) {
@@ -46,10 +46,24 @@ require_once('database/db.class.php');
           })
         }
       })
-      // FUNÇÃO VER DETALHES
+      // Funçao exibir mais detalhes
+      $("#candidatos").delegate("button", "click", function(event) {
+        //console.log(event.target.value);
+        var id = {
+          id: event.target.value
+        };
+        $.ajax({
+          url: 'get_detalhes_cand.php',
+          method: 'post',
+          data: id,
+          success: function(data) {
+            $('#candidatos').html(data)
+            //console.log(data)
+          }
+        })
+      })
     })
   </script>
-
 </head>
 
 <body>
@@ -65,7 +79,6 @@ require_once('database/db.class.php');
       </form>
     </div>
 
-
     <div id="candidatos">
       Os candidatos seram listados aqui...
     </div>
@@ -75,9 +88,7 @@ require_once('database/db.class.php');
         <button type="button" class="btn btn-outline-info"><b>Voltar<b></button>
       </a>
     </div>
-
   </div>
-
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link href="css/style.css" rel="stylesheet">
