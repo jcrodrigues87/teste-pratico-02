@@ -2,9 +2,9 @@
 
 O trabalho foi dividido em duas partes backend e front-end.
 
+O front-end foi feito usando a linguagem python com o framework django e a api django-rest, o banco de dados utilizado foi o sqlite.
 
-
-
+O front-end foi feito utilizando Vue, para o css foi utilizado a interface Bulma. Para fazer as requisições necessárias ao back-end foi utilizado o Axios.
 
 # Requisitos para rodar a Aplicação
 
