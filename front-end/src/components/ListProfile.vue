@@ -2,12 +2,14 @@
   <div class="container">
     <h3 class="title" align="center">Listagem de Programadores</h3>
 
+    
     <div class="box has-background-grey-light pt-1 pb-1 mb-0">
       <h3 class="subtitle" align="center">Filtrar por</h3>
 
       <div
         class="columns is-variable is-1-mobile is-0-tablet is-3-desktop mx-3 pb-0"
       >
+        <!-- Campos utilizados para ativar e realizar a filtragem-->
         <div class="column">
           <label class="checkbox">
             <input type="checkbox" v-model="checkName" v-on:change="cleanCheckName" />
@@ -38,6 +40,7 @@
     </div>
 
     <template>
+      <!-- Campos utilizados para pegar informação sobre o que deve ser filtrado-->
       <div class="box has-background-grey-lighter mb-0" v-if="checkName">
         <div class="field is-horizontal">
           <div class="field-label is-normal mb-0">
@@ -199,6 +202,7 @@
       </div>
     </template>
 
+    <!-- Div para mostrar os dados dos programadores que foram filtrados-->
     <div class="box has-background-primary-dark mb-0">
       <div class="columns">
         <div class="column is-1">Código</div>
@@ -226,8 +230,10 @@
 </template>
 
 <script>
+// Import da interface axios
 const axios = require('axios');
 
+// Contante para printar as habilidades de maneira mais legivel
 const convert = {
   java: "Java",
   node: "Node.js",
@@ -251,6 +257,7 @@ const convert = {
 export default {
   data() {
     return {
+      // Variáveis utilizados para fazer a filtragem
       checkName: true,
       checkSkill: false,
 
@@ -280,6 +287,7 @@ export default {
     };
   },
 
+  // Função para carregar os perfis do banco de dados
   async created () {
     this.fetchProfiles()
   },
@@ -314,7 +322,7 @@ export default {
         })
     },
 
-
+    // Função que realiza a filtragem
     filter: function () {
       var dev;
 
@@ -329,6 +337,7 @@ export default {
       this.$forceUpdate();
     },
 
+    // Funções para deixar a listagem mais responsiva e livre de possíveis bugs com nomes e habilidades antigas
     cleanCheckName: function () {
       this.name = ''
       this.filter()
@@ -341,10 +350,12 @@ export default {
       this.filter()
     },
 
+    // Filtro do nome
     filter_name: function (dev) {
       return dev.name.includes(this.name);
     },
 
+    // Filtro das habilidades
     filter_skill: function (dev) {
       for (let skill in this.skills)
         if (this.skills[skill]) if (!dev.skills[skill]) return false;
@@ -352,6 +363,7 @@ export default {
       return true;
     },
 
+    // Funções utilizadas para formatar o texto das habilidades
     skilled: function (skills) {
       var list = [];
       for (let skill in this.skills) if (skills[skill]) list.push(skill);

@@ -7,6 +7,7 @@
       <h3 class="subtitle" align="center">
           Dados básicos
       </h3>
+      <!-- Campos utilizados para coletar os dados principais-->
       <div class="field is-horizontal">
           <div class="field-label is-normal ">
             <label class="label">Nome</label>
@@ -58,6 +59,8 @@
           </div>
       </div>
     </div>
+
+    <!-- Campos utilizados coletar os dados de endereço-->
     <div class="box has-background-grey mb-0">
       <h3 class="subtitle" align="center">
           Endereço
@@ -117,6 +120,7 @@
           </div>
       </div>
     </div>
+    <!-- Campos utilizados para coletar as habilidades-->
     <div class="box has-background-grey-light ">
       <h3 class="subtitle" align="center">
           Habilidades
@@ -234,15 +238,19 @@
           </div>
       </div>
     </div>
+    <!-- Campos utilizados para controlar as formações-->
     <p class="buttons mx-4 is-centered">
+      <!-- Botão para adicionar uma formação-->
       <button class="button is-info is-rounded  " v-on:click="addFormation">Adicionar Formação</button>
       <button class="button is-danger is-filled is-rounded " v-on:click="clearFormation">
+        <!-- Botão para limpar todas as formações-->
       <span>Limpar Formações</span>
       <span class="icon is-small">
       <i class="fas fa-times"></i>
       </span>
       </button>
     </p>
+    <!-- Campos utilizados para guardar as informações das formações-->
     <div v-for="(item, idx) in formations" :key="idx" class="box has-background-gray mb-0">
         <div class="field is-horizontal ">
           <div class="field-label is-normal ">
@@ -274,6 +282,7 @@
         </div>
     </div>
     <br />
+    <!-- Botõoes de cadastro e limpeza do formulário-->
     <p class="buttons mx-4 is-centered">
       <button class="button is-success is-rounded" v-on:click="registerProfile">
       <span class="icon is-small">
@@ -296,6 +305,7 @@ const axios = require('axios');
 
 export default {
   data() {
+    // Variáveis utilizadas para armazenar os valores dos campos
     return {
       name: "",
       email: "",
@@ -306,8 +316,6 @@ export default {
       city: "",
       street: "",
       complement: "",
-
-      programmers: [],
 
       skills: {
         java: false,
@@ -332,19 +340,9 @@ export default {
     }
   },
 
-  async created () {
-    this.fetchProfiles()
-  },
-
   methods: {
 
-    fetchProfiles: function () {
-      axios.get('http://localhost:8000/profiles/profile-list/')
-        .then((response) => {
-          this.programmers = response.data
-        })
-    },
-
+    // Função para criar uma formação
     addFormation: function () {
       this.formations.push({
         course: "",
@@ -355,6 +353,7 @@ export default {
       return 0;
     },
 
+    // Função para registrar um perfil, faz a requisição para a api django-rest
     registerProfile: function () {
       let f = this.formations;
       let programmer = this.saveProgrammer(f);
@@ -364,6 +363,7 @@ export default {
       return true;
     },
 
+    // Função para limpar os campos do formulário
     clearData: function () {
       this.name = "";
       this.email = "";
@@ -383,10 +383,12 @@ export default {
       this.formations = [];
     },
 
+    // Função para limpar somente as formações
     clearFormation: function () {
       this.formations = [];
     },
 
+    // Função que faz a requisição dos dados de endereço para o site viacep
     async getAdress() {
       if (this.cep.length == 8) {
         let resposta = await axios.get(
@@ -403,6 +405,7 @@ export default {
       }
     },
 
+    // Função que retorna o programador para ser salvo no banco de dados
     saveProgrammer: function (f) {
       var p = {
         name: this.name,

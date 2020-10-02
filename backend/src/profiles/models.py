@@ -1,23 +1,23 @@
 from django.db import models
 
-# Create your models here.
+# Modelagem do banco de dados
 
 class Profiles(models.Model):
-    # Principal Data
+    # Dados principais
     name = models.CharField(max_length=100, help_text="DD/MM/AAAA")
     birth = models.CharField(max_length=10, help_text="DD/MM/AAAA")
     email = models.CharField(max_length=100, unique=True)
     telephone = models.CharField(max_length=16, help_text="(DDD) 9XXXX-XXXX")
     cod = models.AutoField(primary_key=True)
     
-    # Adress
+    # Dados de endereço
     cep = models.CharField(max_length=16, help_text="XXXXX-XXX")
     uf = models.CharField(max_length=2)
     city = models.CharField(max_length=100)
     street = models.CharField(max_length=100)
     complement = models.CharField(max_length=100)
 
-    # Skills
+    # Habilidades
     java = models.BooleanField('Java', default=False)
     node = models.BooleanField('Node.js', default=False)
     cpp = models.BooleanField("C++", default=False)
@@ -36,6 +36,8 @@ class Profiles(models.Model):
     backend = models.BooleanField("Backend", default=False)
     frontend = models.BooleanField("Front-End", default=False)
 
+
+# Modelo das formações com o curso, instituto, conclusão e chave estrangeira que está relacionada a um perfil
 class Formations(models.Model):
     course = models.CharField(max_length=100)
     institute = models.CharField(max_length=100)

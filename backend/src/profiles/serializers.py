@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from .models import Profiles, Formations
 
+# Serializadores que tranformam os dados para serem salvos no banco de dados
+
 class FormationsSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Formations

@@ -2,6 +2,7 @@
 from django.urls import path
 from . import views
 
+# URLs que fazem a ligação das páginas da API
 urlpatterns = [
 	path('', views.profileOverview, name="profile-overview"),
 	path('profile-create/', views.profileCreate, name="profile-create"),

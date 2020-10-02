@@ -2,6 +2,7 @@
   <div id="app">
     <nav class="navbar is-info" role="navigation" aria-label="main navigation">
       <div class="navbar-menu">
+        <!-- Links para as duas páginas implementadas-->
         <div class="navbar-start">
           <router-link class="navbar-item" to="/">Lista de Programadores</router-link>
           <router-link class="navbar-item" to="/create">Cadastrar Programador</router-link>

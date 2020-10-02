@@ -1,15 +1,11 @@
-from django.shortcuts import render
-from django.http import JsonResponse,HttpResponse
-import rest_framework.response as rest
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import FormationsSerializer, FormationsSerializerDTO, ProfileSerializer, ProfileSerializerDTO
-from django.shortcuts import render
+from .serializers import FormationsSerializer, ProfileSerializer, ProfileSerializerDTO
 
 from .models import Formations, Profiles
-# Create your views here.
 
+# Tela basica dos perfis que mostra as paginas existentes
 @api_view(['GET'])
 def profileOverview(request):
 
@@ -20,6 +16,7 @@ def profileOverview(request):
 
     return Response(response_urls)
 
+# Parte da API que lida com as requisições de cadastro feitas pelo axios
 @api_view(['POST'])
 def profileCreate(request):
     serializer = ProfileSerializerDTO(data=request.data)
@@ -31,12 +28,14 @@ def profileCreate(request):
         print(serializer.data)
         return Response(serializer.errors)
     
+# Parte da API que lida com as requisições de buscar todos os dados no banco de dados
 @api_view(['GET'])
 def profileList(request):
     profiles = Profiles.objects.all()
     serializer = ProfileSerializer(profiles, many=True)
     return Response(serializer.data)
 
+# API para mostrar todas as formacoes que estão salvas no banco de dados
 @api_view(['GET'])
 def formations(request):
     formations = Formations.objects.all()
