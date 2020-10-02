@@ -36,22 +36,8 @@ class Profiles(models.Model):
     backend = models.BooleanField("Backend", default=False)
     frontend = models.BooleanField("Front-End", default=False)
 
-    formations = models.TextField()
-
-    # Education
-    #formacoes = models.ManyToManyField()
-
-    '''
-    def save(self, *args, **kwargs):
-        # This means that the model isn't saved to the database yet
-        if self._state.adding:
-            # Get the maximum cod value from the database
-            cod = self.objects.all().aggregate(largest=models.Max('display_id'))['largest']
-
-            # aggregate can return None! Check it first.
-            # If it isn't none, just use the last ID specified (which should be the greatest) and add one to it
-            if cod is not None:
-                self.cod = cod + 1
-
-        super(Profiles, self).save(*args, **kwargs)
-    '''
+class Formations(models.Model):
+    course = models.CharField(max_length=100)
+    institute = models.CharField(max_length=100)
+    conclusion = models.DateField()
+    profile = models.ForeignKey(Profiles, on_delete=models.CASCADE)

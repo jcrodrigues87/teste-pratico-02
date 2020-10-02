@@ -1,6 +1,15 @@
+# Descrição
+
+O trabalho foi dividido em duas partes backend e front-end.
+
+
+
+
+
 # Requisitos para rodar a Aplicação
 
 1 - Python 3.8.2 ou maior
+
 2 - pip3
 
 ## Como iniciar os servidores

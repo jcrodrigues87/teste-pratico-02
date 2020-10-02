@@ -4,10 +4,10 @@ import rest_framework.response as rest
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import ProfileSerializer
+from .serializers import FormationsSerializer, FormationsSerializerDTO, ProfileSerializer, ProfileSerializerDTO
 from django.shortcuts import render
 
-from .models import Profiles
+from .models import Formations, Profiles
 # Create your views here.
 
 @api_view(['GET'])
@@ -22,16 +22,23 @@ def profileOverview(request):
 
 @api_view(['POST'])
 def profileCreate(request):
-    serializer = ProfileSerializer(data=request.data)
+    serializer = ProfileSerializerDTO(data=request.data)
 
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data)
     else:
+        print(serializer.data)
         return Response(serializer.errors)
     
 @api_view(['GET'])
 def profileList(request):
     profiles = Profiles.objects.all()
     serializer = ProfileSerializer(profiles, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def formations(request):
+    formations = Formations.objects.all()
+    serializer = FormationsSerializer(formations, many=True)
     return Response(serializer.data)

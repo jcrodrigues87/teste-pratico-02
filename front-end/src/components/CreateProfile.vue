@@ -254,7 +254,7 @@
               </div>
           </div>
           <div class="field-label is-normal ">
-              <label class="label">Curso</label>
+              <label class="label">Instituição</label>
           </div>
           <div class="field-body">
               <div class="field">
@@ -352,19 +352,11 @@ export default {
         conclusion: "",
       });
 
-      //console.log(this.formations);
-
       return 0;
     },
 
     registerProfile: function () {
-      let vali = this.validations()
-      // console.log(vali)
-      // console.log(!vali)
-      if (!vali) return false;
-
-      let f = JSON.stringify(this.formations);
-      // console.log("2 Atravessei o impossivel")
+      let f = this.formations;
       let programmer = this.saveProgrammer(f);
       
       axios.post('http://localhost:8000/profiles/profile-create/', programmer)
@@ -409,46 +401,6 @@ export default {
         this.street = dados["logradouro"];
         this.complement = dados["complemento"];
       }
-    },
-
-    validations: function () {
-      let e = this.emailVal()
-      // console.log(e)
-      if (!e) return false;
-      if (!this.telephoneVal()) return false;
-      if (!this.birthVal()) return false;
-      if (!this.cepVal()) return false;
-      if (this.emptyField()) return false;
-      return true;
-    },
-
-    emailVal: function () {
-
-      for (let i in this.programmers){
-        if (this.email == this.programmers[i].email){
-          // console.log("1 Email repetido");
-          alert("Email já cadastrado")
-          return false
-        }
-      }
-
-      return true
-    },
-
-    telephoneVal: function () {
-      return true;
-    },
-
-    birthVal: function () {
-      return true;
-    },
-
-    cepVal: function () {
-      return true;
-    },
-
-    emptyField: function () {
-      return false;
     },
 
     saveProgrammer: function (f) {
