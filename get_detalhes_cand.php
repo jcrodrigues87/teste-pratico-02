@@ -27,7 +27,8 @@ if ($resultado_cand) {
 
   echo '<div class="col-md-4">';
   echo '<span> <strong>Nome: </strong>' . $registro_cad["nome"] . '</span> <br>';
-  echo '<span> <strong>Data de Nascimento: </strong> ' . $registro_cad["data_nascimento"] . '</span>';
+  echo '<span> <strong>Data de Nascimento: </strong> ' .
+    date('d/m/Y', strtotime($registro_form["data_nascimento"])) . '</span>';
   echo '</div>';
 
   echo '<div class="col-md-4">';
