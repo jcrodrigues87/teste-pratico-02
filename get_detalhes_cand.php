@@ -9,48 +9,53 @@ $objDb = new db();
 $link = $objDb->conecta_mysql();
 
 //Buscando candidato e suas formações
-$sql = "SELECT DISTINCT codigo, nome, data_nascimento, email, telefone, logradouro, 
-cep, habilidades, nome_do_curso, nome_da_instituicao, data_conclusao 
-FROM candidatos INNER JOIN formacoes ON candidatos.codigo = formacoes.cod_candidato 
-WHERE candidatos.codigo = '$codigo_candidato'";
+$sql = "SELECT c.codigo, c.nome, c.data_nascimento, c.email, c.telefone, c.logradouro, \n"
+  . "c.cep, c.habilidades\n"
+  . "FROM candidatos as c WHERE c.codigo = '$codigo_candidato'";
+
+$sql2 = "SELECT * FROM formacoes as f WHERE f.cod_candidato='$codigo_candidato'";
 
 
-$resultado = mysqli_query($link, $sql);
+$resultado_cand = mysqli_query($link, $sql);
+$resultado_form = mysqli_query($link, $sql2);
 
-if ($resultado) {
-  echo '
-  <table class="table table-striped">
-  <thead>
-  <tr>
-  <th scope="col">Nome</th>
-  <th scope="col">Data Nascimento</th>
-  <th scope="col">E-mail</th>
-  <th scope="col">Telefone</th>
-  <th scope="col">Logradouro</th>
-  <th scope="col">Cep</th>
-  <th scope="col">Habilidades</th>
-  <th scope="col">Nome do Curso</th>
-  <th scope="col">Nome da Instituição</th>
-  <th scope="col">Data de Conclusão</th>
-  </tr>
-  </thead>
-  <tbody>
-';
-  while ($registro_cad = mysqli_fetch_array($resultado, MYSQLI_ASSOC)) {
-    echo '<tr>';
-    echo '<td> ' . $registro_cad["nome"] . '</td>';
-    echo '<td>' . $registro_cad["data_nascimento"] . '</td>';
-    echo '<td>' . $registro_cad["email"] . '</td>';
-    echo '<td>' . $registro_cad["telefone"] . '</td>';
-    echo '<td> ' . $registro_cad["logradouro"] . '</td>';
-    echo '<td>' . $registro_cad["cep"] . '</td>';
-    echo '<td>' . $registro_cad["habilidades"] . '</td>';
-    echo '<td>' . $registro_cad["nome_do_curso"] . '</td>';
-    echo '<td> ' . $registro_cad["nome_da_instituicao"] . '</td>';
-    echo '<td>' . $registro_cad["data_conclusao"] . '</td>';
-    echo '</tr>';
+if ($resultado_cand) {
+  echo '<div class=row>';
+  $registro_cad = mysqli_fetch_array($resultado_cand, MYSQLI_ASSOC);
+
+  echo '<div class="col-md-12 center"><h4> Dados pessoais: </h4> </div>';
+
+  echo '<div class="col-md-4">';
+  echo '<span> <strong>Nome: </strong>' . $registro_cad["nome"] . '</span> <br>';
+  echo '<span> <strong>Data de Nascimento: </strong> ' . $registro_cad["data_nascimento"] . '</span>';
+  echo '</div>';
+
+  echo '<div class="col-md-4">';
+  echo '<span> <strong>E-mail:</strong> ' . $registro_cad["email"] . '</span> <br>';
+  echo '<span> <strong>Telefone:</strong> ' . $registro_cad["telefone"] . '</span>';
+  echo '</div>';
+
+  echo '<div class="col-md-4">';
+  echo '<span> <strong>Logradouro: </strong> ' . $registro_cad["logradouro"] . '</span><br>';
+  echo '<span> <strong>CEP: </strong>' . $registro_cad["cep"] . '</span><br><br>';
+  echo '</div>';
+
+  echo '<div class="col-md-12 center"><h4> Habilidades: </h4> </div>';
+  echo '<div class="col-md-12 center">';
+  echo '<span>' . $registro_cad["habilidades"] . '</span>';
+  echo '</div>';
+
+  echo '<div class="col-md-12 center"><h4> Formações: </h4> </div>';
+  //Escrevendo todas as formações do candidato
+  while ($registro_form = mysqli_fetch_array($resultado_form, MYSQLI_ASSOC)) {
+    echo '<div class="col-md-12 center">';
+    echo '<div class="col-md-4"> <strong>Curso: </strong>' . $registro_form["nome_do_curso"] . '</div>';
+    echo '<div class="col-md-4"> <strong>Instituição do curso: </strong>' . $registro_form["nome_da_instituicao"] . '</div>';
+    echo '<div class="col-md-4"> <strong>Conclusão: </strong>' .
+      date('d/m/Y', strtotime($registro_form["data_conclusao"])) . '</div>';
+    echo '</div>';
   }
-  echo '</tbody> </table>';
+  echo '</div>';
 } else {
   echo 'Erro ao buscar detalhes do candidato no banco';
 }
