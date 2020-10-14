@@ -49,7 +49,6 @@ VALUES ('$nome', '$data_nasc', '$email', '$telefone', '$logradouro', '$cep', '$h
 
 //Executando a query e testando se não houve erro
 if (mysqli_query($link, $sql)) {
-  echo "Candidato cadastrato com sucesso! <br>";
 
   //Buscar o codigo do candidato no banco atraves do email
   $sql = "SELECT codigo, email FROM candidatos WHERE email = '$email'";
@@ -67,9 +66,11 @@ if (mysqli_query($link, $sql)) {
       $sql = "INSERT INTO formacoes(nome_do_curso, nome_da_instituicao, data_conclusao, cod_candidato) 
       VALUES ('$curso[$i]','$instituicao[$i]','$conclusao[$i]','$codido_candidato')";
       if (mysqli_query($link, $sql)) {
-        echo "Formação do candidato cadastrada com sucesso!";
+        echo '<script> alert ("Formação do candidato cadastrada com sucesso!"); 
+        location.href=("../index.php")</script>';
       } else {
-        echo "Erro ao registrar Formação do usuário!";
+        echo '<script> alert ("Erro ao registrar Formação do usuário!"); 
+        location.href=("../index.php")</script>';
       }
     }
   }
