@@ -1,0 +1,52 @@
+.endereco,
+.dados {
+  display: flex;
+  justify-content: center;
+}
+
+.header {
+  margin-bottom: 2%;
+  color: #28a745;
+}
+
+.lista,
+.buscar {
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.col-md-6 input {
+  margin: 6px 0;
+}
+
+.dados input {
+  margin: 6px 0;
+}
+
+.dados label {
+  width: 80px;
+  margin-top: 10px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.center a button {
+  width: 200px;
+}
+
+.habilidades,
+.formacoes {
+  border: 1px solid rgb(170, 169, 169);
+  padding: 1%;
+  border-radius: 5px;
+  margin-bottom: 1%;
+}
+
+.btn-buscar {
+  margin-left: 2%;
+}
