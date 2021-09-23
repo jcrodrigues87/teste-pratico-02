@@ -7,7 +7,7 @@
 		public function __construct ($banco){
 			$this->banco = $banco;
 		}
-		
+		//funcao retorna todas habilidades a partir do id da pessoa passado
 		public function SelectId($id){
 			return $this->banco->select("SELECT
 											p.id,h.descricao

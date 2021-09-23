@@ -1,11 +1,7 @@
 <?php
 	include "conf.php";
-	
-	
-	
 	$PessoaDal = new DalCad_pessoa($banco);
 	if(isset($_POST['Gravar'])){
-		
 		$cadpessoa = new EntitiesCad_pessoa();
 		$cadpessoa->setnome($_POST['nome']);
 		$cadpessoa->setdtnascimento($_POST['dtnascimento']);
@@ -18,9 +14,7 @@
 		$cadpessoa->setrua($_POST['rua']);
 		$cadpessoa->setnumero($_POST['numero']);
 		$cadpessoa->setcomplemento($_POST['complemento']);
-		
 		$cadpessoa->setformacao($_POST['curso'],$_POST['instituicao'],$_POST['dtconclusao']);
-		
 		if(isset($_POST['habilidades'])){
 			$cadpessoa->sethabilidades($_POST['habilidades']);
 		}
@@ -35,7 +29,7 @@
 			
 			
 		}
-		header("location:index.php");
+		//header("location:index.php");
 	}
 	
 	if(isset($_GET['id'])){
@@ -124,19 +118,17 @@
         });	
 	</script>
 	
-	
-	
-	<style>
-		.form-group{padding:10px;}
-	</style>
-	
 </head>
 <body>
 	
 	<div class='container'>
 	<div class='row'>
-	<h1>Adicionar</h1>
-	<a href='index.php'>Voltar</a>
+	<center><h1>Banco de Talentos</h1></center>
+	<?php if(isset($_GET['id'])){echo "<h2>Editar Registro</h2>";}else{echo "<h2>Novo Registro</h2>";}?>
+	
+	
+	
+	<div col='col-sm-1'><a href='index.php' class='btn btn-primary'>Voltar</a>
 	<hr>
 	</div>
 	<div class='row'>
@@ -190,8 +182,7 @@
 				<label>Estado</label>
 		</div>
 		<div class='row'>
-				<input type='text' size='5' name='uf' id='uf' value='<?php if((isset($reg['uf']))){echo $reg['uf'];}?>'><br>
-			</div>
+			<input type='text' size='5' name='uf' id='uf' value='<?php if((isset($reg['uf']))){echo $reg['uf'];}?>'><br>
 		</div>
 		
 		<div class='row'>	
@@ -232,18 +223,15 @@
 		
 		<h2>Formação</h2>
 		<div class='row'>
-				<div id='formacao'>
-					<button type='button' id='addcampos'>Adicionar Formação</button>
+			<div id='formacao'>
+				<button type='button' id='addcampos'>Adicionar Formação</button>
 				
-					<div id='formacao'>
 					<?php 
 						if((isset($reg['id']))){
-						foreach($rowformacao->fetchall() as $rowform){
+							foreach($rowformacao->fetchall() as $rowform){
 						?>
 							<div class='row'>
-									<div class='form-group'>
-										<label>Curso</label>
-									</div>
+								<label>Curso</label>
 							</div>
 							<div class='row'>
 								<input type='text' name='curso[]' value='<?php if((isset($rowform['curso']))){echo $rowform['curso'];}?>'><br>
@@ -259,43 +247,34 @@
 							</div>
 							<div class='row'>
 								<input type='date' name='dtconclusao[]' value='<?php if((isset($rowform['dataconclusao']))){echo $rowform['dataconclusao'];}?>'><br>
+							</div>	
+						<?php
+							}//fim do foreach
+						}else{
+						?>
+							<div class='row'>
+								<label>Curso</label>
+							</div>								
+							<div class='row'>
+								<input type='text' name='curso[]' value=''><br>
 							</div>
-				
-								
+							<div class='row'>
+								<label>Instituição</label>
+							</div>
+							<div class='row'>
+								<input type='text' name='instituicao[]' value=''><br>
+							</div>
+							<div class='row'>
+								<label>Data de Conclusao</label>
+							</div>
+							<div class='row'>
+								<input type='date' name='dtconclusao[]' value=''><br>
+							</div>
 						<?php
 						}
-						}else{
-					?>
-					<div class='form-group'>
-					
-					<div class='row'>
-							
-						<div class='form-group'>
-							<label>Curso</label>
-						</div>
-					</div>		
-						
-						<div class='row'>
-							<input type='text' name='curso[]' value=''><br>
-						</div>
-						
-						<div class='row'>
-							<label>Instituição</label>
-						</div>
-						<div class='row'>
-							<input type='text' name='instituicao[]' value=''><br>
-						</div>
-						<div class='row'>
-							<label>Data de Conclusao</label>
-						</div>
-						<div class='row'>
-							<input type='date' name='dtconclusao[]' value=''><br>
-						</div>
-						</div></div>
-						
-						<?php }?>
-					</div>
-				</div>
+					//fim do else?>
+			</div>
+		</div>
 		
 		</hr>
 		<h2>Habilidades</h2>
@@ -306,28 +285,26 @@
 				$row = $habilidades->getAll();
 			}
 			
-			
 			if( $row->rowcount()>=1){
 				foreach($row as $data){		
-					echo"<input type='checkbox' name='habilidades[]' value='{$data['id']}'";
+					echo"<div class = 'col'><input type='checkbox' name='habilidades[]' value='{$data['id']}'";
 						if((isset($reg['id']))){
 							if($data['usado'] != ''){
 								echo "checked";
 							}
 						}
-					echo "><label>{$data['descricao']}</label><br>";
+					echo "><label>{$data['descricao']}</label></div>";
 				}
 			}
 			
 		
-		?>	
+		?>	<br>
 		<input type='submit' name='Gravar' value='Gravar'><br>
 	</form>
 	</div>
 	<script>
 		$("#addcampos").click(function(){
 			$("#formacao").append("<div class='form-group'>");
-			
 			$("#formacao").append("<div class='row'><label>Curso</label></div><div class='row'><input type='text' name='curso[]' value=''></div>");
 			$("#formacao").append("<div class='row'><label>Instituição</label></div><div class='row'><input type='text' name='instituicao[]' value=''></div>");
 			$("#formacao").append("<div class='row'><label>Data de Conclusao</label></div><div class='row'><input type='date' name='dtconclusao[]' value=''></div>");

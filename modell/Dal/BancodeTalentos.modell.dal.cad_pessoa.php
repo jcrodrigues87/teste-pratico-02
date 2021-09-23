@@ -3,13 +3,13 @@
 	class DalCad_pessoa{
 		private $banco;
 		
-		
-		
 		public function __construct($banco){
 			$this->banco = $banco;
-		}
+		}//fim do constructor
 		
-		public function SelectWhere($pessoa,$habilidades = null){
+		//funcao retorna as pessoas a partir de filtro por nome da pessoa ou um array das habilidades que uma pessoa possui
+		public function SelectWhere($pessoa = null,$habilidades = null){
+			//sql2 mantenho ela caso de algo errado na sql original
 			$sql2 = "SELECT c.id codigo,c.nome,c.email,c.telefone,(
 											SELECT GROUP_CONCAT(descricao)descricao
 												fROM cad_pessoa c
@@ -19,9 +19,10 @@
 											)descricao
 										fROM cad_pessoa c
 										where nome like '%".$pessoa."%'
+										group by c.id
 										";
 										
-			$sql1 = "SELECT c.id codigo,c.nome,c.email,c.telefone,(
+			$sql = "SELECT c.id codigo,c.nome,c.email,c.telefone,(
 											SELECT GROUP_CONCAT(descricao)descricao
 												fROM cad_pessoa c
 													left join cad_pessoa_habilidade p on c.id = p.cad_pessoa_id
@@ -31,22 +32,18 @@
 										fROM cad_pessoa c
 											inner join cad_pessoa_habilidade h on h.cad_pessoa_id = c.id
 										where (c.nome like '%".$pessoa."%')
+										
 										";
 			
-			
-			if(is_null($habilidades)){
-			;
-				$sql = $sql2;
-			}
-			else{
+		//funcao altera a sql usada caso exista habilidades
+			if(!(is_null($habilidades))){
 				$reg = implode(",",$habilidades);
-				
-				$sql = $sql1. "and (h.cad_habilidade_id in (".$reg."))";
-			
+				$sql = $sql. "and (h.cad_habilidade_id in (".$reg."))";	
 			}
-			
-				return $this->banco->select($sql,array());
+			$sql = $sql."group by c.id";
+			return $this->banco->select($sql,array());
 		}
+		
 		
 		public function SelectAll(){
 			return $this->banco->select('SELECT c.id codigo,c.nome,c.email,c.telefone,(

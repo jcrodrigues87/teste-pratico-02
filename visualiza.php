@@ -1,8 +1,6 @@
 <?php
 	include "conf.php";
-
 	$PessoaDal = new DalCad_pessoa($banco);
-	
 	if(isset($_GET['id'])){
 		$pessoaregistro = $PessoaDal->selectID($_GET['id']);
 		$reg = $pessoaregistro->fetch();
@@ -13,10 +11,7 @@
 	}else{
 		header("location:index.php");
 	}
-	
-	
 	$habilidades = new DalCadHabilidade($banco);
-	
 ?>
 <html lang='pb-br'>
 <head>
@@ -25,7 +20,6 @@
 		
 	<title>Visualizar Registro de talentos</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	
@@ -36,8 +30,9 @@
 	
 	<div class='container'>
 	<div class='row'>
-	<h1>Visualizar</h1>
-	<a href='index.php'>Voltar</a>
+	<center><h1>Banco de Talentos</h1></center>
+	<h2>Visualizar</h2>
+	<div col='col-sm-1'><a class='btn btn-primary' href='index.php'>Voltar</a></div>
 	<hr>
 	</div>
 	<div class='row'>

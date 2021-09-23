@@ -11,11 +11,11 @@
 		}
 		
 		
-		
+		//retorna todas as habilidades
 		public function getAll(){
 			return $this->banco->select('select id, descricao from Cad_habilidades',array());
 		}
-		
+		//retorna as habilidades selecionads a partir da pk da pessoa
 		public function SelectHabilidadeckeced($id){
 			
 			return $this->banco->select('select id,descricao,GROUP_CONCAT(idusado) usado
