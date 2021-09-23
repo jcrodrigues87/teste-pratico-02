@@ -1,3 +1,5 @@
+Usar php e mysql.
+
 Copie o todos os fontes  para pasta servidor apache com mysql
 acesse a pasta model->DataAcess
 Abra o arquivo BancoTaletos.Model.Database.php com notepa++
@@ -18,3 +20,5 @@ O fonte trara registros com as caracteristicas desejadas
 Cadastro.clique em novo registro
 Insira os dados
 clique em salvar.
+
+Para adicionar novas habilidade, acessar banco de dados a tabela cad_habilidades e adicionar manualmente nova funcao.
