@@ -87,7 +87,7 @@
 				
 				
 				if($dados->rowcount() == 0){
-					echo "nenhum registro localizado faca primeiro cadastro.<br> <a href='grava.php'>Clique para fazer primeiro cadastro</a>";
+					echo "nenhum registro localizado faca primeiro cadastro.<br> <a href='cadastro.php'>Clique para fazer primeiro cadastro</a>";
 				}else{
 					foreach($dados->fetchall() as $row)
 					{

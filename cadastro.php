@@ -235,7 +235,7 @@
 				<div id='formacao'>
 					<button type='button' id='addcampos'>Adicionar Formação</button>
 				
-				
+					<div id='formacao'>
 					<?php 
 						if((isset($reg['id']))){
 						foreach($rowformacao->fetchall() as $rowform){
@@ -260,7 +260,7 @@
 							<div class='row'>
 								<input type='date' name='dtconclusao[]' value='<?php if((isset($rowform['dataconclusao']))){echo $rowform['dataconclusao'];}?>'><br>
 							</div>
-				</div>
+				
 								
 						<?php
 						}
@@ -291,9 +291,10 @@
 						<div class='row'>
 							<input type='date' name='dtconclusao[]' value=''><br>
 						</div>
-				</div></div>
+						</div></div>
 						
 						<?php }?>
+					</div>
 				</div>
 		
 		</hr>
